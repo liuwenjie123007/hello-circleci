@@ -8,7 +8,8 @@ commands:
       - run: golangci-lint run ./...
   diff:
     steps:
-      - run: echo diff
+      - run: make fmt
+      - run: make git diff --exit-code
   test:
     steps:
       - run: echo test
