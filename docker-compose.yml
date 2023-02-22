@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  server:
+    image: golang:1.19.4-bullseye
+    tty: true
+    command: bash
+    volumes:
+      - ./:/src
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    working_dir: /src
+    ports:
+      - 8080:8080
+  db:
+    image: mysql:8.0.19
+    platform: linux/amd64
+    volumes:
+      - ./hack/db/scripts:/docker-entrypoint-initdb.d
+      - ./hack/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_DATABASE: circle
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - 3306:3306
