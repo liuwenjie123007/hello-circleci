@@ -12,7 +12,7 @@ commands:
       - run: git diff --exit-code
   test:
     steps:
-      - run: echo test
+      - run: make test
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
