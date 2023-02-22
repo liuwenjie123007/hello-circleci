@@ -18,9 +18,8 @@ test:
 .PHONY: docker
 docker:
 	apt update -y
-	apt install -y clang-format=1:11.0-51+nmu5 cmake
+	apt install -y clang-format=1:11.0-51+nmu5
 
 .PHONY: fmt
 fmt:
 	go fmt ./...
-	clang-format -i proto/*.proto
