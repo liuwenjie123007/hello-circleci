@@ -71,7 +71,7 @@ jobs:
             mv /tmp/docker/* /usr/bin
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -f /build -t CircleCI-Public/circleci-demo-docker:$TAG .
+          docker build -t CircleCI-Public/circleci-demo-docker:$TAG -f /build/Dockerfile .
 
 workflows:
   build-workflow:
