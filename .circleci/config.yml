@@ -40,12 +40,8 @@ commands:
             MYSQL_USER: user
             MYSQL_PASSWORD: password
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   build:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: golangci/golangci-lint:v1.50
       - image: cimg/mysql:8.0
@@ -56,18 +52,19 @@ jobs:
           MYSQL_PASSWORD: password
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_HOST: 'db'
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
       - wait
       - lint
       - diff
       - test
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+      - run: |
+          TAG=0.1.$CIRCLE_BUILD_NUM
+          docker build -f /build -t CircleCI-Public/circleci-demo-docker:$TAG .
 
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-workflow:
     jobs:
