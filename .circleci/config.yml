@@ -19,15 +19,20 @@ commands:
             echo Failed waiting for MySQL && exit 1
   lint:
     steps:
-      - run: golangci-lint run ./...
+      - run:
+        name: lint
+        command: golangci-lint run ./...
   diff:
     steps:
-      - run: make fmt
-      - run: git diff --exit-code
+      - run:
+          name: diff
+          command: |
+            make fmt
+            git diff --exit-code
   test:
     steps:
       - run:
-          name: test step
+          name: test
           command: make test
           environment:
             MYSQL_HOST: db
