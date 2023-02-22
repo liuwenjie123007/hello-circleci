@@ -29,6 +29,12 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: golangci/golangci-lint:v1.50
+      - image: mysql:8.0.19
+        environment:
+          MYSQL_DATABASE: circle
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
