@@ -64,9 +64,6 @@ jobs:
   build:
     docker:
       - image: golangci/golangci-lint:v1.50
-        auth:
-          username: wenjie0521
-          password: '403094845'
       - image: cimg/mysql:8.0
         name: db
         environment:
