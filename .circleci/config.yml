@@ -20,8 +20,8 @@ commands:
   lint:
     steps:
       - run:
-        name: lint
-        command: golangci-lint run ./...
+          name: lint
+          command: golangci-lint run ./...
   diff:
     steps:
       - run:
