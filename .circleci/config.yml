@@ -8,6 +8,7 @@ commands:
       - run:
           name: MYSQL_ALLOW_EMPTY_PASSWORD
           command: |
+            apt -y update
             apt -y install netcat
             for i in `seq 1 10`;
             do
