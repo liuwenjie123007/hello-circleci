@@ -9,7 +9,7 @@ commands:
   diff:
     steps:
       - run: make fmt
-      - run: make git diff --exit-code
+      - run: git diff --exit-code
   test:
     steps:
       - run: echo test
