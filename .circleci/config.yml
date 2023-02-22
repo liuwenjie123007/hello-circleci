@@ -12,7 +12,14 @@ commands:
       - run: git diff --exit-code
   test:
     steps:
-      - run: make test
+      - run:
+          name: test step
+          command: make test
+          environment:
+            MYSQL_HOST: db
+            MYSQL_PORT: 3306
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
