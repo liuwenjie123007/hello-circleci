@@ -8,6 +8,7 @@ commands:
       - run:
           name: MYSQL_ALLOW_EMPTY_PASSWORD
           command: |
+            apt -y install nc
             for i in `seq 1 10`;
             do
               nc -z 127.0.0.1 3306 && echo Success && exit 0
@@ -42,11 +43,13 @@ jobs:
     docker:
       - image: golangci/golangci-lint:v1.50
       - image: cimg/mysql:8.0
+        name: db
         environment:
           MYSQL_DATABASE: circle
           MYSQL_USER: user
           MYSQL_PASSWORD: password
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_HOST: 'db'
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
