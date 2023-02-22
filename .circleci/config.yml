@@ -6,7 +6,7 @@ commands:
   wait:
     steps:
       - run:
-          name: MYSQL_ALLOW_EMPTY_PASSWORD
+          name: wait db
           command: |
             apt -y update
             apt -y install netcat
